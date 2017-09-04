@@ -1,5 +1,30 @@
+import pytest
+
 def make_groups(people):
+    """Makes groups from a list of people.
+
+    Args:
+        A list of people.
+
+    Returns:
+        A list of groups, where each group size is between 3 to 5, inclusive.
+
+    Raises:
+        ValueError: number of people is less than 3 or none.
+
+    """
+    if people is None or len(people) < 3:
+        raise ValueError("Number of people should be at least 3")
+
     return [people]
+
+def test_empty_team():
+    with pytest.raises(ValueError):
+        make_groups(None)
+
+def test_less_than_3_people():
+    with pytest.raises(ValueError):
+        make_groups(['Happy', 'Dopey'])
 
 def test_small_team():
     team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy']
