@@ -22,11 +22,11 @@ def test_empty_team():
     with pytest.raises(ValueError):
         make_groups(None)
 
-def test_less_than_3_people():
+def test_less_than_three_people():
     with pytest.raises(ValueError):
         make_groups(['Happy', 'Dopey'])
 
-def test_small_team():
+def test_team_of_four():
     team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy']
     groups = make_groups(team)
 
