@@ -1,6 +1,8 @@
-# content of test_sample.py
-def func(x):
-    return x + 1
+def make_groups(people):
+    return []
 
-def test_answer():
-    assert func(3) == 5
+def test_group_generation():
+    team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow']
+    groups = make_groups(team)
+
+    assert len(groups) == 2
