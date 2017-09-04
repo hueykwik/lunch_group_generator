@@ -32,7 +32,6 @@ def test_team_of_four():
 
     assert len(groups) == 1
 
-
 def test_group_generation():
     team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow']
     groups = make_groups(team)
