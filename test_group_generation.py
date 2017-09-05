@@ -1,5 +1,7 @@
 import pytest
 
+from random import sample
+
 
 def get_one_factor(n, possible_factors):
     """
@@ -48,10 +50,13 @@ def make_groups(people):
         ValueError: number of people is less than 3 or none.
 
     """
+
     if people is None or len(people) < 3:
         raise ValueError("Number of people should be at least 3")
 
-    return [people]
+    shuffled_people = sample(people, len(people))
+
+    return [shuffled_people]
 
 def test_get_one_factor():
     assert get_one_factor(12, [3,4,5]) == 3
