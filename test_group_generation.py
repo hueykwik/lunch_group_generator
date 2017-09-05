@@ -137,6 +137,19 @@ def test_get_group_sizes():
     assert group_size == 5
     assert special_group_size == 3
 
+    group_size, special_group_size = get_group_sizes(997)
+    assert group_size == 3
+    assert special_group_size == 4
+
+def test_special_group_sizes():
+    n_values = [x for x in range(3,1000) if x%3 and x%4 and x%5]
+
+    for n in n_values:
+        group_size, special_group_size = get_group_sizes(n)
+        assert group_size in [3,4,5]
+        assert special_group_size in [3,4,5]
+
+
 def test_get_one_factor():
     assert get_one_factor(12, [3,4,5]) == 3
     assert get_one_factor(12, [4,3,5]) == 4
