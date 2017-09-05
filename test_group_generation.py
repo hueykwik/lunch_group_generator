@@ -205,3 +205,9 @@ def test_team_of_eleven():
     assert len(groups) == 3
     assert membership_equal(team, groups)
 
+def test_team_of_206():
+    team = ['Name%d' % i for i in range(206)]
+    groups = make_groups(team)
+
+    assert len(groups) == 68
+    assert membership_equal(team, groups)
