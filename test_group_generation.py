@@ -55,13 +55,18 @@ def make_groups(people, group_sizes=[3,4,5]):
     if people is None or len(people) < 3:
         raise ValueError("Number of people should be at least 3")
 
-    shuffled_people = sample(people, len(people))
+    num_people = len(people)
 
-    group_size = get_one_factor(len(people), group_sizes)
+    shuffled_people = sample(people, num_people)
+
+    groups = list()
+
+    group_size = get_one_factor(num_people, group_sizes)
     start_index = 0
 
-    num_groups = len(people) // group_size
-    groups = list()
+    num_groups = num_people // group_size
+
+    # if needed, add a group that's not the same as group_size
 
     for i in range(num_groups):
         group = shuffled_people[start_index:start_index+group_size]
@@ -113,6 +118,13 @@ def test_team_of_eight():
 
 def test_team_of_nine():
     team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow', 'Clumsy']
+    groups = make_groups(team)
+
+    assert len(groups) == 3
+    assert membership_equal(team, groups)
+
+def test_team_of_eleven():
+    team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow', 'Clumsy', 'Wishy-Washy', 'Coughy']
     groups = make_groups(team)
 
     assert len(groups) == 3
