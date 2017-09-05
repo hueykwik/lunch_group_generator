@@ -2,8 +2,9 @@ import pytest
 
 from random import sample
 
+GROUP_SIZES = [3,4,5]
 
-def get_group_sizes(n, group_sizes=[3,4,5]):
+def get_group_sizes(n):
     """
     Given a number n, returns the group sizes needed to split the group
     mostly evenly.
@@ -27,14 +28,14 @@ def get_group_sizes(n, group_sizes=[3,4,5]):
     Returns:
         Group size and a special group size. If there is no special group size, then it will have a value of None.
     """
-    group_size = get_one_factor(n, group_sizes)
+    group_size = get_one_factor(n, GROUP_SIZES)
     special_group_size = None
 
     if group_size is not None:
         return group_size, None
 
-    for size in group_sizes:
-        group_size = get_one_factor(n-size, group_sizes)
+    for size in GROUP_SIZES:
+        group_size = get_one_factor(n-size, GROUP_SIZES)
         if group_size:
             special_group_size = size
             break
@@ -75,12 +76,11 @@ def is_factor(n, factor):
     """
     return n % factor == 0
 
-def make_groups(people, group_sizes=[3,4,5]):
+def make_groups(people):
     """Makes groups from a list of people.
 
     Args:
         people(list): A list of people.
-        group_sizes(list): A list of group sizes.
 
     Returns:
         A list of groups, where each group size is between 3 to 5, inclusive.
@@ -100,7 +100,7 @@ def make_groups(people, group_sizes=[3,4,5]):
     groups = list()
     start_index = 0
 
-    group_size = get_one_factor(num_people, group_sizes)
+    group_size = get_one_factor(num_people, GROUP_SIZES)
 
     # if group_size is None:
     #     diff_group_size = get_diff_group_size(num_people, group_sizes)
@@ -146,16 +146,16 @@ def test_special_group_sizes():
 
     for n in n_values:
         group_size, special_group_size = get_group_sizes(n)
-        assert group_size in [3,4,5]
-        assert special_group_size in [3,4,5]
+        assert group_size in GROUP_SIZES
+        assert special_group_size in GROUP_SIZES
 
 
 def test_get_one_factor():
-    assert get_one_factor(12, [3,4,5]) == 3
+    assert get_one_factor(12, GROUP_SIZES) == 3
     assert get_one_factor(12, [4,3,5]) == 4
 
 def test_get_one_factor_no_factors():
-    assert get_one_factor(29, [3,4,5]) == None
+    assert get_one_factor(29, GROUP_SIZES) == None
 
 def test_10_factor_of_2():
     assert not is_factor(2, 10)
