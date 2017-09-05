@@ -100,7 +100,9 @@ def make_groups(people):
     groups = list()
     start_index = 0
 
-    group_size = get_one_factor(num_people, GROUP_SIZES)
+    group_size, special_group_size = get_group_sizes(num_people)
+
+    #group_size = get_one_factor(num_people, GROUP_SIZES)
 
     # if group_size is None:
     #     diff_group_size = get_diff_group_size(num_people, group_sizes)
