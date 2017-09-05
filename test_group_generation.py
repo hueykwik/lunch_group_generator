@@ -27,21 +27,19 @@ def get_group_sizes(n, group_sizes=[3,4,5]):
     Returns:
         Group size and a special group size. If there is no special group size, then it will have a value of None.
     """
-
-#    group_size = n //
-
     group_size = get_one_factor(n, group_sizes)
     special_group_size = None
 
     if group_size is not None:
         return group_size, None
 
-    #if group_size is None:
+    for size in group_sizes:
+        group_size = get_one_factor(n-size, group_sizes)
+        if group_size:
+            special_group_size = size
+            break
 
-
-    return None, None
-
-    #return group_size, special_group_size
+    return group_size, special_group_size
 
 def get_one_factor(n, possible_factors):
     """
@@ -133,6 +131,10 @@ def test_get_group_sizes():
 
     group_size, special_group_size = get_group_sizes(11)
     assert group_size == 4
+    assert special_group_size == 3
+
+    group_size, special_group_size = get_group_sizes(98)
+    assert group_size == 5
     assert special_group_size == 3
 
 def test_get_one_factor():
