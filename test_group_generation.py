@@ -37,7 +37,7 @@ def is_factor(n, factor):
     """
     return n % factor == 0
 
-def make_groups(people):
+def make_groups(people, group_sizes=[3,4,5]):
     """Makes groups from a list of people.
 
     Args:
@@ -56,7 +56,14 @@ def make_groups(people):
 
     shuffled_people = sample(people, len(people))
 
-    return [shuffled_people]
+    group_size = get_one_factor(len(people), group_sizes)
+    start_index = 0
+
+    num_groups = len(people) / group_size
+    groups = list()
+    groups.append(shuffled_people)
+
+    return groups
 
 def test_get_one_factor():
     assert get_one_factor(12, [3,4,5]) == 3
