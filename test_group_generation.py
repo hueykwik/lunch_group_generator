@@ -115,10 +115,6 @@ def test_team_of_nine():
     team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow', 'Clumsy']
     groups = make_groups(team)
 
-    members = [member for group in groups for member in group]
-    members = set(members)
-    original_members = set(team)
-
     assert len(groups) == 3
     assert membership_equal(team, groups)
 
