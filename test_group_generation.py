@@ -1,18 +1,22 @@
 import pytest
 
-def divisible_by(dividend, divisors):
+
+def get_one_factor(n, factors):
+    pass
+
+def is_factor(n, factor):
     """
-    Returns a divisor that can divide dividend without a remainder, or None.
+    Returns True if f is a factor of n.
 
     Args:
-        dividend(int):
-        divisors(list): A list of divisors, i.e. integers to divide by
+        n (int): dividend
+        factor (int): divisor
 
     Returns:
-        A divisor that can divide dividend without a remainder, otherwise None.
-        If multiple divisors in `divisors` satisfy this criteria, this function
-        will arbitrarily return one of them.
+        True if n % factor == 0, False otherwise
     """
+    return True
+
 
 def make_groups(people):
     """Makes groups from a list of people.
@@ -32,9 +36,8 @@ def make_groups(people):
 
     return [people]
 
-def test_10_divisible_by_2():
-    divisor = divisible_by(10, [2])
-    assert divisor == 2
+def test_2_factor_of_10():
+    assert is_factor(10, 2)
 
 def test_empty_team():
     with pytest.raises(ValueError):
