@@ -1,8 +1,26 @@
 import pytest
 
 
-def get_one_factor(n, factors):
-    pass
+def get_one_factor(n, possible_factors):
+    """
+    Returns one of the possible_factors if it is actually a factor of n,
+    otherwise None.
+
+    Args:
+        n (int): dividend
+        possible_factors (list): list of possible factors
+
+
+    Returns:
+        One of the possible_factors if it is a factor, None otherwise.
+        If multiple values in possible_factors are factors, it returns the
+        earliest value in the list of possible_factors.
+    """
+    for possible_factor in possible_factors:
+        if is_factor(n, possible_factor):
+            return possible_factor
+
+    return None
 
 def is_factor(n, factor):
     """
@@ -15,8 +33,7 @@ def is_factor(n, factor):
     Returns:
         True if n % factor == 0, False otherwise
     """
-    return True
-
+    return n % factor == 0
 
 def make_groups(people):
     """Makes groups from a list of people.
@@ -35,6 +52,16 @@ def make_groups(people):
         raise ValueError("Number of people should be at least 3")
 
     return [people]
+
+def test_get_one_factor():
+    assert get_one_factor(12, [3,4,5]) == 3
+    assert get_one_factor(12, [4,3,5]) == 4
+
+def test_get_one_factor_no_factors():
+    assert get_one_factor(29, [3,4,5]) == None
+
+def test_10_factor_of_2():
+    assert not is_factor(2, 10)
 
 def test_2_factor_of_10():
     assert is_factor(10, 2)
