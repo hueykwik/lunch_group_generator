@@ -102,17 +102,14 @@ def make_groups(people):
 
     group_size, special_group_size = get_group_sizes(num_people)
 
-    #group_size = get_one_factor(num_people, GROUP_SIZES)
+    if special_group_size is not None:
+        group = shuffled_people[start_index:start_index+special_group_size]
+        groups.append(group)
 
-    # if group_size is None:
-    #     diff_group_size = get_diff_group_size(num_people, group_sizes)
-
-    #     num_people -= len(diff_group) # Fix this
-
+        start_index += special_group_size
+        num_people -= special_group_size
 
     num_groups = num_people // group_size
-
-    # if needed, add a group that's not the same as group_size
 
     for i in range(num_groups):
         group = shuffled_people[start_index:start_index+group_size]
@@ -181,6 +178,8 @@ def test_team_of_four():
 
 def membership_equal(original_team, new_groups):
     original_members = set(original_team)
+    group_members = [member for group in new_groups for member in group]
+    assert len(original_members) == len(group_members)
     group_members = set([member for group in new_groups for member in group])
 
     return original_members == group_members
