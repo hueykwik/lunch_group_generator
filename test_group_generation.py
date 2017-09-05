@@ -98,11 +98,18 @@ def test_team_of_four():
 
     assert len(groups) == 1
 
+def membership_equal(original_team, new_groups):
+    original_members = set(original_team)
+    group_members = set([member for group in new_groups for member in group])
+
+    return original_members == group_members
+
 def test_team_of_eight():
     team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow']
     groups = make_groups(team)
 
     assert len(groups) == 2
+    assert membership_equal(team, groups)
 
 def test_team_of_nine():
     team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow', 'Clumsy']
@@ -113,5 +120,5 @@ def test_team_of_nine():
     original_members = set(team)
 
     assert len(groups) == 3
-    assert members == original_members
+    assert membership_equal(team, groups)
 
