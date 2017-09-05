@@ -42,6 +42,7 @@ def make_groups(people, group_sizes=[3,4,5]):
 
     Args:
         people(list): A list of people.
+        group_sizes(list): A list of group sizes.
 
     Returns:
         A list of groups, where each group size is between 3 to 5, inclusive.
@@ -59,9 +60,14 @@ def make_groups(people, group_sizes=[3,4,5]):
     group_size = get_one_factor(len(people), group_sizes)
     start_index = 0
 
-    num_groups = len(people) / group_size
+    num_groups = len(people) // group_size
     groups = list()
-    groups.append(shuffled_people)
+
+    for i in range(num_groups):
+        group = shuffled_people[start_index:start_index+group_size]
+        groups.append(group)
+
+        start_index += group_size
 
     return groups
 
@@ -97,3 +103,15 @@ def test_team_of_eight():
     groups = make_groups(team)
 
     assert len(groups) == 2
+
+def test_team_of_nine():
+    team = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow', 'Clumsy']
+    groups = make_groups(team)
+
+    members = [member for group in groups for member in group]
+    members = set(members)
+    original_members = set(team)
+
+    assert len(groups) == 3
+    assert members == original_members
+
