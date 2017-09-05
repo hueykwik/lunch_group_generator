@@ -3,6 +3,46 @@ import pytest
 from random import sample
 
 
+def get_group_sizes(n, group_sizes=[3,4,5]):
+    """
+    Given a number n, returns the group sizes needed to split the group
+    mostly evenly.
+
+    Some values of n do not divide evenly by a single group size of 3, 4, or 5.
+    In that case, we return two group sizes:
+
+    1. Special group size: One group will have this size.
+    2. Normal group size: The rest of the groups will have this size.
+
+    An example makes this clearer:
+
+    Let n = 11 and group sizes are 3, 4, and 5. These group sizes are not factors of 11.
+
+    However, if we make a group of 3, then we can split the remaining members into groups of 4. `special_group_size` would then be 3, and `group_size` would be 4.
+
+    Args:
+        n (int): number of members
+        group_sizes(list): list of possible group_sizes
+
+    Returns:
+        Group size and a special group size. If there is no special group size, then it will have a value of None.
+    """
+
+#    group_size = n //
+
+    group_size = get_one_factor(n, group_sizes)
+    special_group_size = None
+
+    if group_size is not None:
+        return group_size, None
+
+    #if group_size is None:
+
+
+    return None, None
+
+    #return group_size, special_group_size
+
 def get_one_factor(n, possible_factors):
     """
     Returns one of the possible_factors if it is actually a factor of n,
@@ -60,9 +100,15 @@ def make_groups(people, group_sizes=[3,4,5]):
     shuffled_people = sample(people, num_people)
 
     groups = list()
+    start_index = 0
 
     group_size = get_one_factor(num_people, group_sizes)
-    start_index = 0
+
+    # if group_size is None:
+    #     diff_group_size = get_diff_group_size(num_people, group_sizes)
+
+    #     num_people -= len(diff_group) # Fix this
+
 
     num_groups = num_people // group_size
 
@@ -75,6 +121,11 @@ def make_groups(people, group_sizes=[3,4,5]):
         start_index += group_size
 
     return groups
+
+def test_get_group_sizes():
+    group_size, special_group_size = get_group_sizes(12)
+    assert group_size == 3
+    assert special_group_size == None
 
 def test_get_one_factor():
     assert get_one_factor(12, [3,4,5]) == 3
