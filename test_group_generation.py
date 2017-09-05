@@ -27,7 +27,14 @@ def get_group_sizes(n):
 
     Returns:
         Group size and a special group size. If there is no special group size, then it will have a value of None.
+
+    Raises:
+        ValueError: n is less than 3 or None.
+
     """
+    if n is None or n < 3:
+        raise ValueError("n should be at least 3")
+
     group_size = get_one_factor(n, GROUP_SIZES)
     special_group_size = None
 
@@ -86,7 +93,7 @@ def make_groups(people):
         A list of groups, where each group size is between 3 to 5, inclusive.
 
     Raises:
-        ValueError: number of people is less than 3 or none.
+        ValueError: number of people is less than 3 or None.
 
     """
 
@@ -139,6 +146,15 @@ def test_get_group_sizes():
     group_size, special_group_size = get_group_sizes(997)
     assert group_size == 3
     assert special_group_size == 4
+
+    with pytest.raises(ValueError):
+        get_group_sizes(None)
+
+    with pytest.raises(ValueError):
+        get_group_sizes(-1)
+
+    with pytest.raises(ValueError):
+        get_group_sizes(2)
 
 def test_special_group_sizes():
     n_values = [x for x in range(3,1000) if x%3 and x%4 and x%5]
