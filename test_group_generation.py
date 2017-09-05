@@ -127,6 +127,14 @@ def test_get_group_sizes():
     assert group_size == 3
     assert special_group_size == None
 
+    group_size, special_group_size = get_group_sizes(8)
+    assert group_size == 4
+    assert special_group_size == None
+
+    group_size, special_group_size = get_group_sizes(11)
+    assert group_size == 4
+    assert special_group_size == 3
+
 def test_get_one_factor():
     assert get_one_factor(12, [3,4,5]) == 3
     assert get_one_factor(12, [4,3,5]) == 4
