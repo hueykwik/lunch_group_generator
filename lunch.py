@@ -15,7 +15,7 @@ def add():
 @click.command()
 def groups():
     """Generate groups for lunch."""
-    click.echo('Dropped the database')
+    click.echo('Make groups')
 
 cli.add_command(add)
 cli.add_command(groups)
