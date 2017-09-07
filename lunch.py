@@ -20,7 +20,8 @@ def add(name):
 @click.command()
 def clear():
     """Clear the lunch roster."""
-    click.echo('Clear the lunch roster')
+    open(ROSTER_FILE, 'w').close()
+    click.echo('Cleared the lunch roster')
 
 def get_roster():
     roster = None
@@ -43,6 +44,7 @@ def groups():
 
 cli.add_command(add)
 cli.add_command(groups)
+cli.add_command(clear)
 
 if __name__ == '__main__':
     cli()
