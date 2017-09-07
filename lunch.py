@@ -24,18 +24,21 @@ def clear():
     click.echo('Cleared the lunch roster')
 
 def get_roster():
-    roster = None
-    with open(ROSTER_FILE) as f:
-        roster = f.read().splitlines()
+    roster = []
+    try:
+        with open(ROSTER_FILE) as f:
+            roster = f.read().splitlines()
+    except FileNotFoundError:
+        pass
     return roster
 
 @click.command()
 def groups():
     """Generate groups for lunch."""
-    try:
-        roster = get_roster()
-    except FileNotFoundError:
-        click.echo("Roster is currently empty. Please use the 'add' command to add people.")
+    roster = get_roster()
+
+    if len(roster) < 3:
+        click.echo("Roster is currently less than three people. Please use the add command to add more folks.")
         return
 
     group_list = make_groups(roster)
