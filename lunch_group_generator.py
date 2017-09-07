@@ -1,5 +1,7 @@
 import click
 
+roster = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow', 'Clumsy', 'Wishy-Washy', 'Coughy']
+
 @click.group()
 def cli():
     """Makes lunch groups."""
@@ -24,3 +26,4 @@ cli.add_command(groups)
 
 if __name__ == '__main__':
     cli()
+
