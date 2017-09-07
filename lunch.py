@@ -2,7 +2,7 @@ import click
 
 from groups import make_groups
 
-roster = ['Happy', 'Dopey', 'Grumpy', 'Sneezy', 'Bashful', 'Sleepy', 'Doc', 'Snow', 'Clumsy', 'Wishy-Washy', 'Coughy']
+ROSTER_FILE = 'roster.txt'
 
 @click.group()
 def cli():
@@ -10,10 +10,14 @@ def cli():
     pass
 
 @click.command()
-def add():
-    """Add people to the lunch roster."""
-    click.echo('Add a person or persons to the lunch roster')
+@click.option('--name', prompt=True)
+def add(name):
+    """Add a name to the lunch roster."""
+    with open(ROSTER_FILE, 'a') as f:
+        f.write(name)
+        click.echo('Addded %s to the lunch roster.' % name)
 
+@click.command()
 def clear():
     """Clear the lunch roster."""
     click.echo('Clear the lunch roster')
@@ -21,6 +25,7 @@ def clear():
 @click.command()
 def groups():
     """Generate groups for lunch."""
+
     group_list = make_groups(roster)
 
     for i, group in enumerate(group_list):
