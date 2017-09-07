@@ -14,7 +14,7 @@ def cli():
 def add(name):
     """Add a name to the lunch roster."""
     with open(ROSTER_FILE, 'a') as f:
-        f.write(name)
+        f.write(name + '\n')
         click.echo('Addded %s to the lunch roster.' % name)
 
 @click.command()
