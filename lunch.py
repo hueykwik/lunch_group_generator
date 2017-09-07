@@ -32,7 +32,11 @@ def get_roster():
 @click.command()
 def groups():
     """Generate groups for lunch."""
-    roster = get_roster()
+    try:
+        roster = get_roster()
+    except FileNotFoundError:
+        click.echo("Roster is currently empty. Please use the 'add' command to add people.")
+        return
 
     group_list = make_groups(roster)
 
