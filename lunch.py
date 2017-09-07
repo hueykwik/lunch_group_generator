@@ -35,6 +35,8 @@ def groups():
 
     group_list = make_groups(roster)
 
+    click.echo("\nLunch Groups")
+    click.echo("------------")
     for i, group in enumerate(group_list):
         group_label = 'Group %d: ' % (i+1)
         click.echo(group_label + ', '.join(group))
