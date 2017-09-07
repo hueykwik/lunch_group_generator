@@ -20,10 +20,6 @@ def groups():
 cli.add_command(add)
 cli.add_command(groups)
 
-# @click.command()
-# def make_groups():
-#     print("Making Groups")
-
 if __name__ == '__main__':
     cli()
 
