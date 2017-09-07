@@ -103,3 +103,11 @@ def test_team_of_206():
 
     assert len(groups) == 68
     assert membership_equal(team, groups)
+
+def test_chinese_and_english_names():
+    team = ['郭飛龍', 'Max Payne', '郭漢民', '龍存信',
+            'Johnny Cash','Martin Law']
+    groups = make_groups(team)
+
+    assert len(groups) == 2
+    assert membership_equal(team, groups)
