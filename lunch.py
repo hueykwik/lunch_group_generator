@@ -22,9 +22,16 @@ def clear():
     """Clear the lunch roster."""
     click.echo('Clear the lunch roster')
 
+def get_roster():
+    roster = None
+    with open(ROSTER_FILE) as f:
+        roster = f.read().splitlines()
+    return roster
+
 @click.command()
 def groups():
     """Generate groups for lunch."""
+    roster = get_roster()
 
     group_list = make_groups(roster)
 
