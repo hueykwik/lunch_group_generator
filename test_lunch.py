@@ -5,6 +5,7 @@ import lunch
 
 SIX_PERSON = ['Huey', 'Dewey', 'Louie', 'Webby', 'Donald', 'Scrooge']
 
+
 def test_empty_roster():
     runner = CliRunner()
 
@@ -13,6 +14,7 @@ def test_empty_roster():
 
         assert result.exit_code == 0
         assert 'Roster is currently less than three people' in result.output
+
 
 def test_groups():
     runner = CliRunner()
@@ -30,6 +32,7 @@ def test_groups():
         assert 'Group 1' in result.output
         assert 'Group 2' in result.output
 
+
 def test_add():
     runner = CliRunner()
 
@@ -38,6 +41,7 @@ def test_add():
 
         assert result.exit_code == 0
         assert 'huey' in result.output
+
 
 def test_add_groups():
     runner = CliRunner()

@@ -4,10 +4,12 @@ from groups import make_groups
 
 ROSTER_FILE = 'roster.txt'
 
+
 @click.group()
 def cli():
     """Makes lunch groups."""
     pass
+
 
 @click.command()
 @click.option('--name', prompt=True)
@@ -17,11 +19,13 @@ def add(name):
         f.write(name + '\n')
         click.echo('Addded %s to the lunch roster.' % name)
 
+
 @click.command()
 def clear():
     """Clear the lunch roster."""
     open(ROSTER_FILE, 'w').close()
     click.echo('Cleared the lunch roster')
+
 
 def get_roster():
     roster = []
@@ -31,6 +35,7 @@ def get_roster():
     except FileNotFoundError:
         pass
     return roster
+
 
 @click.command()
 def groups():
@@ -46,7 +51,7 @@ def groups():
     click.echo("\nLunch Groups")
     click.echo("------------")
     for i, group in enumerate(group_list):
-        group_label = 'Group %d: ' % (i+1)
+        group_label = 'Group %d: ' % (i + 1)
         click.echo(group_label + ', '.join(group))
 
 cli.add_command(add)

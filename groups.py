@@ -1,6 +1,7 @@
 from random import sample
 
-GROUP_SIZES = [3,4,5]
+GROUP_SIZES = [3, 4, 5]
+
 
 def get_group_sizes(n):
     """
@@ -40,12 +41,13 @@ def get_group_sizes(n):
         return group_size, None
 
     for size in GROUP_SIZES:
-        group_size = get_one_factor(n-size, GROUP_SIZES)
+        group_size = get_one_factor(n - size, GROUP_SIZES)
         if group_size:
             special_group_size = size
             break
 
     return group_size, special_group_size
+
 
 def get_one_factor(n, possible_factors):
     """
@@ -68,6 +70,7 @@ def get_one_factor(n, possible_factors):
 
     return None
 
+
 def is_factor(n, factor):
     """
     Returns True if f is a factor of n.
@@ -80,6 +83,7 @@ def is_factor(n, factor):
         True if n % factor == 0, False otherwise
     """
     return n % factor == 0
+
 
 def make_groups(people):
     """Makes groups from a list of people.
@@ -108,7 +112,7 @@ def make_groups(people):
     group_size, special_group_size = get_group_sizes(num_people)
 
     if special_group_size is not None:
-        group = shuffled_people[start_index:start_index+special_group_size]
+        group = shuffled_people[start_index:start_index + special_group_size]
         groups.append(group)
 
         start_index += special_group_size
@@ -117,7 +121,7 @@ def make_groups(people):
     num_groups = num_people // group_size
 
     for i in range(num_groups):
-        group = shuffled_people[start_index:start_index+group_size]
+        group = shuffled_people[start_index:start_index + group_size]
         groups.append(group)
 
         start_index += group_size
