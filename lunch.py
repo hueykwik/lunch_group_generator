@@ -14,6 +14,10 @@ def add():
     """Add people to the lunch roster."""
     click.echo('Add a person or persons to the lunch roster')
 
+def clear():
+    """Clear the lunch roster."""
+    click.echo('Clear the lunch roster')
+
 @click.command()
 def groups():
     """Generate groups for lunch."""
