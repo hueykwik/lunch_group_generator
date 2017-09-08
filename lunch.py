@@ -39,7 +39,10 @@ def show_roster():
 def absent():
     """Mark a person as absent."""
     show_roster()
-    pass
+
+    row_num = click.prompt('Enter the id of the person who is absent', type=int)
+
+    click.echo('%d' % row_num)
 
 
 def get_roster():
