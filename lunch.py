@@ -28,7 +28,13 @@ def clear():
 
 
 def show_roster():
-    click.echo("hello")
+    roster = get_roster()
+
+    for i, name in enumerate(roster):
+        click.echo("%d: %s" % ((i + 1), name))
+
+
+    #click.echo(roster)
 
 
 @click.command()
