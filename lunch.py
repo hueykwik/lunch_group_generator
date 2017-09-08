@@ -3,7 +3,9 @@ import click
 from groups import make_groups
 
 ROSTER_FILE = 'roster.txt'
+ABSENT_FILE = 'absent.txt'
 
+absent_nums = list()
 
 @click.group()
 def cli():
@@ -32,19 +34,23 @@ def show_roster(roster):
         click.echo("%d: %s" % ((i + 1), name))
 
 
+def save_absent(row_nums, roster):
+    with open(ABSENT_FILE, 'a') as f:
+        for row_num in row_nums:
+            f.write(roster[row_num] + '\n')
+
+
 @click.command()
 def absent():
     """Mark a person as absent."""
     roster = get_roster()
     show_roster(roster)
 
-    absent_nums = list()
-
     row_num = click.prompt('Enter the id of the person who is absent', type=int)
 
-    absent_nums.append(row_num)
+    absent_nums.append(row_num-1)
 
-
+    save_absent(absent_nums, roster)
 
 
 def get_roster():
