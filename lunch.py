@@ -27,22 +27,24 @@ def clear():
     click.echo('Cleared the lunch roster')
 
 
-def show_roster():
-    roster = get_roster()
-
+def show_roster(roster):
     for i, name in enumerate(roster):
         click.echo("%d: %s" % ((i + 1), name))
-
 
 
 @click.command()
 def absent():
     """Mark a person as absent."""
-    show_roster()
+    roster = get_roster()
+    show_roster(roster)
+
+    absent_nums = list()
 
     row_num = click.prompt('Enter the id of the person who is absent', type=int)
 
-    click.echo('%d' % row_num)
+    absent_nums.append(row_num)
+
+
 
 
 def get_roster():
