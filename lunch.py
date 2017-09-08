@@ -27,9 +27,14 @@ def clear():
     click.echo('Cleared the lunch roster')
 
 
+def show_roster():
+    click.echo("hello")
+
+
 @click.command()
 def absent():
     """Mark a person as absent."""
+    show_roster()
     pass
 
 
@@ -40,6 +45,7 @@ def get_roster():
             roster = f.read().splitlines()
     except FileNotFoundError:
         pass
+
     return roster
 
 
@@ -63,6 +69,7 @@ def groups():
 cli.add_command(add)
 cli.add_command(groups)
 cli.add_command(clear)
+cli.add_command(absent)
 
 if __name__ == '__main__':
     cli()
