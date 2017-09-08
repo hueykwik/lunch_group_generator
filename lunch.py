@@ -34,8 +34,6 @@ def show_roster():
         click.echo("%d: %s" % ((i + 1), name))
 
 
-    #click.echo(roster)
-
 
 @click.command()
 def absent():
