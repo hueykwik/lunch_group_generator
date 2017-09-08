@@ -27,6 +27,12 @@ def clear():
     click.echo('Cleared the lunch roster')
 
 
+@click.command()
+def absent():
+    """Mark a person as absent."""
+    pass
+
+
 def get_roster():
     roster = []
     try:
