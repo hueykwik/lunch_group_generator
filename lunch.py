@@ -48,7 +48,7 @@ def absent():
 
     row_num = click.prompt('Enter the id of the person who is absent', type=int)
 
-    absent_nums.append(row_num-1)
+    absent_nums.append(row_num - 1)
 
     save_absent(absent_nums, roster)
 
