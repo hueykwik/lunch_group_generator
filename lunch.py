@@ -41,19 +41,34 @@ def save_absent(row_nums, roster):
             f.write(roster[row_num] + '\n')
 
 
+def prompt_row_number(roster_size):
+    """Prompts the user for a row number in our roster, and checks that it is valid. If invalid, then prompts the user until a valid input is given. 0 is reserved for letting the user mark that they are done.
+    """
+
+    while True:
+        row_num = click.prompt('Enter the id of the person who is absent (or 0 to stop)', type=int)
+
+        if row_num <= roster_size:
+            return row_num
+
+        click.echo("Invalid id. Please try again.")
+
+
 @click.command()
 def absent():
     """Mark a person as absent."""
     roster = get_roster()
     show_roster(roster)
 
-    row_num = click.prompt('Enter the id of the person who is absent', type=int)
-
-    absent_nums.append(row_num - 1)
+    roster_size = len(roster)
+    while True:
+        row_num = prompt_row_number(roster_size)
+        if row_num == 0:
+            break
+        click.echo("Removed %s" % roster[row_num - 1])
+        absent_nums.append(row_num - 1)
 
     save_absent(absent_nums, roster)
-
-    click.echo("Removed %s" % roster[row_num - 1])
 
 
 def filter_absent(roster):
