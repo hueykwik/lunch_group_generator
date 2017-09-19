@@ -53,6 +53,8 @@ def absent():
 
     save_absent(absent_nums, roster)
 
+    click.echo("Removed %s" % roster[row_num - 1])
+
 
 def filter_absent(roster):
     try:

@@ -59,6 +59,22 @@ def test_add_groups():
         assert 'Group 2' in result.output
 
 
+def test_mark_absent():
+    runner = CliRunner()
+
+    roster = ELEVEN_PERSON
+
+    with runner.isolated_filesystem():
+        with open(lunch.ROSTER_FILE, 'w') as f:
+            for person in roster:
+                f.write("%s\n" % person)
+
+        result = runner.invoke(lunch.cli, ['absent'], input='1')
+        assert 'Removed Grumpy' in result.output
+
+        assert result.exit_code == 0
+
+
 def test_all_absent():
     runner = CliRunner()
 
