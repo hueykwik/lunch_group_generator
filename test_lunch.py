@@ -1,9 +1,10 @@
-import click
 from click.testing import CliRunner
 
 import lunch
 
 SIX_PERSON = ['Huey', 'Dewey', 'Louie', 'Webby', 'Donald', 'Scrooge']
+
+ELEVEN_PERSON = ['Grumpy', 'Sassy', 'Wimpy', 'Frowny', 'Silly', 'Hungry', 'Dopey', 'Snowy', 'Achy', 'Groany', 'Sickly']
 
 
 def test_empty_roster():
@@ -56,3 +57,22 @@ def test_add_groups():
         assert result.exit_code == 0
         assert 'Group 1' in result.output
         assert 'Group 2' in result.output
+
+
+def test_all_absent():
+    runner = CliRunner()
+
+    roster = ELEVEN_PERSON
+
+    with runner.isolated_filesystem():
+        with open(lunch.ROSTER_FILE, 'w') as f:
+            for person in roster:
+                f.write("%s\n" % person)
+
+        with open(lunch.ABSENT_FILE, 'w') as f:
+            for person in roster:
+                f.write("%s\n" % person)
+
+        result = runner.invoke(lunch.cli, ['groups'])
+        assert result.exit_code == 0
+        assert 'Roster is currently less than three people' in result.output

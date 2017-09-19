@@ -59,7 +59,7 @@ def filter_absent(roster):
         with open(ABSENT_FILE) as f:
             absent_names = f.read().splitlines()
     except FileNotFoundError:
-        pass
+        absent_names = set()
 
     absent_set = set(absent_names)
 
