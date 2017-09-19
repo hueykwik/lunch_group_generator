@@ -53,7 +53,19 @@ def absent():
     save_absent(absent_nums, roster)
 
 
-def get_roster():
+def filter_absent(roster):
+    try:
+        with open(ABSENT_FILE) as f:
+            absent_names = f.read().splitlines()
+    except FileNotFoundError:
+        pass
+
+    absent_set = set(absent_names)
+
+    return set(roster).difference(absent_set)
+
+
+def get_roster(should_filter_absent=False):
     roster = []
     try:
         with open(ROSTER_FILE) as f:
@@ -61,13 +73,16 @@ def get_roster():
     except FileNotFoundError:
         pass
 
+    if should_filter_absent:
+        roster = filter_absent(roster)
+
     return roster
 
 
 @click.command()
 def groups():
     """Generate groups for lunch."""
-    roster = get_roster()
+    roster = get_roster(True)
 
     if len(roster) < 3:
         click.echo("Roster is currently less than three people. Please use the add command to add more folks.")
