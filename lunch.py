@@ -7,6 +7,7 @@ ABSENT_FILE = 'absent.txt'
 
 absent_nums = list()
 
+
 @click.group()
 def cli():
     """Makes lunch groups."""
