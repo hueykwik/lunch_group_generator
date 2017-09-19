@@ -34,6 +34,13 @@ python lunch.py add --name 'Jon Snow'
 python lunch.py clear
 ```
 
+## Running Tests
+I'm assuming you're running within a virtualenv. If so, then run the following command to run all the tests:
+
+```
+python -m pytest
+```
+
 ## Approach
 First, I outlined user stories and also wrote down use cases I wouldn't handle.
 
@@ -55,3 +62,4 @@ I'll mention these below as User Stories and Future.
 After that, I started doing TDD to figure out how to divide a list of people into groups. Once I had that working, I created a skeleton CLI and then started filling in functionality.
 
 In researching how to write good CLIs, I came across Click, so I spent a bit of time learning how to use it.
+
