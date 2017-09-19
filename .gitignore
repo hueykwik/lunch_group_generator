@@ -1,2 +1,4 @@
 .cache
 venv/
+roster.txt
+absent.txt
