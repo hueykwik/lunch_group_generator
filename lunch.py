@@ -104,4 +104,3 @@ cli.add_command(absent)
 
 if __name__ == '__main__':
     cli()
-
